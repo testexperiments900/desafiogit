@@ -1,4 +1,5 @@
 import express from "express";
+import { config } from "./src/utils/config.js";
 
 /* ---------------------- Instancia de servidor ----------------------*/
 const app = express();
@@ -13,6 +14,10 @@ app.get('/', (req, res) => {
     res.send('Ruta Base')
 })
 
+app.get('/dev', (req, res) => {
+    res.send('Ruta Base')
+})
+
 app.get('*', (req, res) => {
     const {url, method } = req;
     res.send(`Ruta ${method} ${url} no está implementada`);
@@ -20,7 +25,7 @@ app.get('*', (req, res) => {
 
 /* ---------------------- Servidor ----------------------*/
 
-const PORT = 3000
+const PORT = config.node.port || 3000;
 const server = app.listen(PORT, () => {
     console.log(`Servidor express escuchando en el puerto ${PORT}`);
 })
